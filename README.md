@@ -14,34 +14,9 @@ User → NGINX → Flask → MySQL
 * **Flask** → Backend application logic
 * **MySQL** → Database
 
-                         🌐 Internet
-                              │
-                              ▼
-                    ┌──────────────────┐
-                    │   AWS EC2        │
-                    │ (Ubuntu Server)  │
-                    └────────┬─────────┘
-                             │
-                 ┌───────────▼───────────┐
-                 │   Docker Network      │
-                 │ (docker-compose)      │
-                 └───────────┬───────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│    NGINX      │   │     Flask     │   │     MySQL     │
-│  (Port 80)    │   │  (Port 5000)  │   │  (Port 3306)  │
-│ Reverse Proxy │──▶│ Application   │──▶│   Database    │
-└───────────────┘   └───────────────┘   └───────────────┘
-        ▲
-        │
-        ▼
-   👤 User (Browser)
-   http://<EC2-PUBLIC-IP>
+## 🏗️ Architecture Diagram
 
----
+![Architecture Diagram](architecturediagram.png)
 
 ## ⚙️ Tech Stack
 
@@ -342,6 +317,4 @@ This project was initially built as a **2-tier architecture** and later upgraded
 * HTTPS (SSL)
 * Kubernetes deployment
 
-# 🏗️ Architecture Diagram
 
-![Architecture Diagram](architecturediagram.png)

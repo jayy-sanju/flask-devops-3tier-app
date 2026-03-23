@@ -344,4 +344,4 @@ This project was initially built as a **2-tier architecture** and later upgraded
 
 # 🏗️ Architecture Diagram
 
-![Architecture Diagram](architecture.png)
+![Architecture Diagram](architecturediagram.png)

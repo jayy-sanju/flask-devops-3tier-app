@@ -1,24 +1,32 @@
 from flask import Flask
-import mysql.connector
 import os
+import time
+import MySQLdb
 
 app = Flask(__name__)
 
-def get_db_connection():
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", "password"),
-        database=os.getenv("DB_NAME", "testdb")
-    )
+while True:
+    try:
+        db = MySQLdb.connect(
+            host="mysql",
+            user="root",
+            passwd="root",
+            db="testdb"
+        )
+        print("Connected to MySQL ✅")
+        break
+    except Exception as e:
+        print("Waiting for MySQL...", e)
+        time.sleep(2)
 
 @app.route('/')
 def home():
     try:
-        conn = get_db_connection()
-        return "Connected to MySQL!"
-    except:
-        return "Database connection failed!"
+        cursor = db.cursor()
+        cursor.execute("SELECT 1")
+        return "MySQL Connected ✅"
+    except Exception as e:
+        return f"Database connection failed! {e}"
 
 @app.route('/health')
 def health():

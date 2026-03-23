@@ -1,10 +1,15 @@
-FROM python:3.12-slim
+FROM python:3.9
 
 WORKDIR /app
 
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
+COPY . .
 
-COPY . /app/
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+    build-essential
+
+# Install Python packages
+RUN pip install flask mysqlclient
 
 CMD ["python", "app.py"]
